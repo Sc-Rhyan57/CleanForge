@@ -1,10 +1,13 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
 
 const config: Config = {
-  darkMode: "class",
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
+      fontFamily: {
+        heading: ["var(--font-space-grotesk)", "sans-serif"],
+        body: ["var(--font-dm-sans)", "sans-serif"],
+      },
       colors: {
         brand: {
           50: "#fff7ed",
@@ -19,44 +22,50 @@ const config: Config = {
           900: "#7c2d12",
         },
         surface: {
-          DEFAULT: "#0a0a0f",
-          50: "#111118",
-          100: "#18181f",
-          200: "#1f1f28",
-          300: "#2a2a35",
+          DEFAULT: "#0a0b0f",
+          100: "#0f1015",
+          200: "#14151c",
+          300: "#1a1b24",
+          400: "#22232e",
         },
-      },
-      fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
       },
       keyframes: {
         "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "0%": { opacity: "0", transform: "translateY(40px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        "fade-in": {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "1" },
         },
-        pulse_glow: {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(249,115,22,0.3)" },
-          "50%": { boxShadow: "0 0 40px rgba(249,115,22,0.6)" },
+        "scan-line": {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100vh)" },
+        },
+        "grid-flow": {
+          "0%": { backgroundPosition: "0% 0%" },
+          "100%": { backgroundPosition: "100% 100%" },
         },
         float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        "line-draw": {
+          "0%": { strokeDashoffset: "1000" },
+          "100%": { strokeDashoffset: "0" },
         },
       },
       animation: {
-        "fade-up": "fade-up 0.6s ease-out forwards",
-        "fade-in": "fade-in 0.5s ease-out forwards",
-        "pulse-glow": "pulse_glow 2s ease-in-out infinite",
-        float: "float 3s ease-in-out infinite",
+        "fade-up": "fade-up 0.8s ease-out forwards",
+        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "scan-line": "scan-line 4s linear infinite",
+        "grid-flow": "grid-flow 20s linear infinite",
+        float: "float 6s ease-in-out infinite",
+        "line-draw": "line-draw 2s ease-out forwards",
       },
     },
   },
   plugins: [],
-};
+}
 
-export default config;
+export default config
