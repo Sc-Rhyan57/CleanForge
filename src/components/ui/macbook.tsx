@@ -3,26 +3,24 @@ import React, { memo, useMemo } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
-  IconBrightnessDown,
-  IconBrightnessUp,
-  IconCaretRightFilled,
-  IconCaretUpFilled,
-  IconChevronUp,
-  IconMicrophone,
-  IconMoon,
-  IconPlayerSkipForward,
-  IconPlayerTrackNext,
-  IconPlayerTrackPrev,
-  IconTable,
-  IconVolume,
-  IconVolume2,
-  IconVolume3,
-  IconSearch,
-  IconWorld,
-  IconCommand,
-  IconCaretLeftFilled,
-  IconCaretDownFilled,
-} from "@tabler/icons-react";
+  Sun,
+  Search,
+  Mic,
+  Moon,
+  SkipBack,
+  SkipForward,
+  ChevronUp,
+  Volume,
+  Volume1,
+  Volume2,
+  Globe,
+  Command,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  Table2,
+  FastForward,
+} from "lucide-react";
 import BlurFade from "../magicui/blur-fade";
 import type { ReactNode } from "react";
 
@@ -154,23 +152,32 @@ export const Trackpad = memo(() => (
 ));
 Trackpad.displayName = "TrackpadMac";
 
+const BrightnessDown = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-[6px] w-[6px]">
+    <circle cx="12" cy="12" r="4" /><line x1="12" y1="2" x2="12" y2="4" /><line x1="12" y1="20" x2="12" y2="22" />
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+    <line x1="2" y1="12" x2="4" y2="12" /><line x1="20" y1="12" x2="22" y2="12" />
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+  </svg>
+);
+
 export const Keypad = memo(() => {
   return (
     <div className="h-full rounded-md bg-[#050505] mx-1 p-1">
       <Row>
         <KBtn className="w-10 items-end justify-start pl-[4px] pb-[2px]" childrenClassName="items-start">esc</KBtn>
-        <KBtn><IconBrightnessDown className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F1</span></KBtn>
-        <KBtn><IconBrightnessUp className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F2</span></KBtn>
-        <KBtn><IconTable className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F3</span></KBtn>
-        <KBtn><IconSearch className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F4</span></KBtn>
-        <KBtn><IconMicrophone className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F5</span></KBtn>
-        <KBtn><IconMoon className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F6</span></KBtn>
-        <KBtn><IconPlayerTrackPrev className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F7</span></KBtn>
-        <KBtn><IconPlayerSkipForward className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F8</span></KBtn>
-        <KBtn><IconPlayerTrackNext className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F9</span></KBtn>
-        <KBtn><IconVolume3 className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F10</span></KBtn>
-        <KBtn><IconVolume2 className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F11</span></KBtn>
-        <KBtn><IconVolume className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F12</span></KBtn>
+        <KBtn><BrightnessDown /><span className="inline-block mt-1">F1</span></KBtn>
+        <KBtn><Sun className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F2</span></KBtn>
+        <KBtn><Table2 className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F3</span></KBtn>
+        <KBtn><Search className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F4</span></KBtn>
+        <KBtn><Mic className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F5</span></KBtn>
+        <KBtn><Moon className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F6</span></KBtn>
+        <KBtn><SkipBack className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F7</span></KBtn>
+        <KBtn><FastForward className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F8</span></KBtn>
+        <KBtn><SkipForward className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F9</span></KBtn>
+        <KBtn><Volume className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F10</span></KBtn>
+        <KBtn><Volume1 className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F11</span></KBtn>
+        <KBtn><Volume2 className="h-[6px] w-[6px]" /><span className="inline-block mt-1">F12</span></KBtn>
         <KBtn><div className="h-4 w-4 rounded-full bg-gradient-to-b from-20% from-neutral-900 via-black via-50% to-neutral-900 to-95% p-px"><div className="bg-black h-full w-full rounded-full" /></div></KBtn>
       </Row>
       <Row>
@@ -205,10 +212,10 @@ export const Keypad = memo(() => {
       <Row>
         <KBtn childrenClassName="h-full justify-between py-[4px]">
           <div className="flex justify-end w-full pr-1"><span className="block">fn</span></div>
-          <div className="flex justify-start w-full pl-1"><IconWorld className="h-[6px] w-[6px]" /></div>
+          <div className="flex justify-start w-full pl-1"><Globe className="h-[6px] w-[6px]" /></div>
         </KBtn>
         <KBtn childrenClassName="h-full justify-between py-[4px]">
-          <div className="flex justify-end w-full pr-1"><IconChevronUp className="h-[6px] w-[6px]" /></div>
+          <div className="flex justify-end w-full pr-1"><ChevronUp className="h-[6px] w-[6px]" /></div>
           <div className="flex justify-start w-full pl-1"><span className="block">control</span></div>
         </KBtn>
         <KBtn childrenClassName="h-full justify-between py-[4px]">
@@ -216,12 +223,12 @@ export const Keypad = memo(() => {
           <div className="flex justify-start w-full pl-1"><span className="block">option</span></div>
         </KBtn>
         <KBtn className="w-8" childrenClassName="h-full justify-between py-[4px]">
-          <div className="flex justify-end w-full pr-1"><IconCommand className="h-[6px] w-[6px]" /></div>
+          <div className="flex justify-end w-full pr-1"><Command className="h-[6px] w-[6px]" /></div>
           <div className="flex justify-start w-full pl-1"><span className="block">command</span></div>
         </KBtn>
         <KBtn className="w-[8.2rem]" />
         <KBtn className="w-8" childrenClassName="h-full justify-between py-[4px]">
-          <div className="flex justify-start w-full pl-1"><IconCommand className="h-[6px] w-[6px]" /></div>
+          <div className="flex justify-start w-full pl-1"><Command className="h-[6px] w-[6px]" /></div>
           <div className="flex justify-start w-full pl-1"><span className="block">command</span></div>
         </KBtn>
         <KBtn childrenClassName="h-full justify-between py-[4px]">
@@ -229,11 +236,11 @@ export const Keypad = memo(() => {
           <div className="flex justify-start w-full pl-1"><span className="block">option</span></div>
         </KBtn>
         <div className="w-[4.9rem] mt-[2px] h-6 p-[0.5px] rounded-[4px] flex flex-col justify-end items-center">
-          <KBtn className="w-6 h-3"><IconCaretUpFilled className="h-[6px] w-[6px]" /></KBtn>
+          <KBtn className="w-6 h-3"><ChevronUp className="h-[6px] w-[6px]" /></KBtn>
           <div className="flex">
-            <KBtn className="w-6 h-3"><IconCaretLeftFilled className="h-[6px] w-[6px]" /></KBtn>
-            <KBtn className="w-6 h-3"><IconCaretDownFilled className="h-[6px] w-[6px]" /></KBtn>
-            <KBtn className="w-6 h-3"><IconCaretRightFilled className="h-[6px] w-[6px]" /></KBtn>
+            <KBtn className="w-6 h-3"><ChevronLeft className="h-[6px] w-[6px]" /></KBtn>
+            <KBtn className="w-6 h-3"><ChevronDown className="h-[6px] w-[6px]" /></KBtn>
+            <KBtn className="w-6 h-3"><ChevronRight className="h-[6px] w-[6px]" /></KBtn>
           </div>
         </div>
       </Row>
