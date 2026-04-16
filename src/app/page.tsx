@@ -1,428 +1,425 @@
-"use client";
-import { motion } from "framer-motion";
-import {
-  Shield,
-  Zap,
-  ThermometerSun,
-  Bot,
-  ArrowRight,
-  Factory,
-  Gauge,
-  Clock,
-  Users,
-  Repeat,
-  Target,
-  ChevronDown,
-} from "lucide-react";
-import BlurFade from "@/components/magicui/blur-fade";
-import DotPattern from "@/components/magicui/dot-pattern";
-import NumberTicker from "@/components/magicui/number-ticker";
-import { MacbookComponent } from "@/components/ui/macbook";
-import WordFadeIn from "@/components/ui/word-fade-in";
-import { Highlight } from "@/components/ui/hero-highlight";
-import Globe from "@/components/globe";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { cn } from "@/lib/utils";
+"use client"
 
-const metrics = [
-  { icon: Clock, value: 75, suffix: "%", label: "Redução no tempo de execução" },
-  { icon: Shield, value: 100, suffix: "%", label: "Eliminação de exposição térmica" },
-  { icon: Gauge, value: 3, suffix: "x", label: "Aumento de produtividade" },
-  { icon: Repeat, value: 100, suffix: "%", label: "Replicável em todos os fornos" },
-];
+import { motion } from "framer-motion"
+import dynamic from "next/dynamic"
+import AnimatedSection from "@/components/AnimatedSection"
+import NumberCounter from "@/components/NumberCounter"
+import ProcessTimeline from "@/components/ProcessTimeline"
+import BeforeAfter from "@/components/BeforeAfter"
+import MacbookFrame from "@/components/MacbookFrame"
+import { ArrowDown, Flame, ShieldCheck, Clock, Factory, Cpu, Zap, Globe2, ChevronRight } from "lucide-react"
 
-const steps = [
-  {
-    icon: Bot,
-    title: "Posicionamento Autônomo",
-    description:
-      "O braço robótico se alinha automaticamente ao poken in door utilizando sensores de proximidade e visão computacional.",
-  },
-  {
-    icon: Zap,
-    title: "Limpeza Inteligente",
-    description:
-      "Jato de ar comprimido a alta pressão remove o material incrustado com variação angular de 120° e profundidade de até 5m.",
-  },
-  {
-    icon: ThermometerSun,
-    title: "Monitoramento Térmico",
-    description:
-      "Sensores infravermelhos monitoram a temperatura em tempo real, protegendo o refratário e garantindo eficiência.",
-  },
-  {
-    icon: Target,
-    title: "Abertura Automatizada",
-    description:
-      "Sistema pneumático remove as tampas metálicas de 20kg sem esforço humano, eliminando o uso de marretas.",
-  },
-];
+const GridLines = dynamic(() => import("@/components/GridLines"), { ssr: false })
+const ParticleField = dynamic(() => import("@/components/ParticleField"), { ssr: false })
+const FurnaceScene = dynamic(() => import("@/components/FurnaceScene"), { ssr: false, loading: () => <div className="w-full h-[500px] bg-surface-100 rounded-xl animate-pulse" /> })
+const ScadaDashboard = dynamic(() => import("@/components/ScadaDashboard"), { ssr: false })
+const CleaningSimulation = dynamic(() => import("@/components/CleaningSimulation"), { ssr: false })
+const FurnaceDiagram = dynamic(() => import("@/components/FurnaceDiagram"), { ssr: false })
+const GlobeVisualization = dynamic(() => import("@/components/GlobeVisualization"), { ssr: false })
 
-const faqItems = [
-  {
-    q: "O sistema pode danificar o refratário?",
-    a: "Não. O CleanForge utiliza jato de ar comprimido calibrado com sensores de pressão que garantem a remoção do material sem contato direto com água ou impacto mecânico no refratário.",
-  },
-  {
-    q: "Funciona nos Fornos 4 e 5 de Matozinhos?",
-    a: "Sim. O sistema é dimensionado para operar em todos os poken in doors (36 no Forno 4 e 48 no Forno 5), com adaptação automática ao layout de cada cuba.",
-  },
-  {
-    q: "Como o equipamento é transportado até a plataforma?",
-    a: "O robô é compacto e modular, projetado para ser deslocado por escadas metálicas e espaços limitados. O sistema de trilhos permite fixação permanente na plataforma.",
-  },
-  {
-    q: "Qual a frequência de manutenção do robô?",
-    a: "Manutenção preventiva trimestral. Componentes expostos ao calor possuem blindagem cerâmica com vida útil de 12 meses.",
-  },
-  {
-    q: "É necessário um operador durante a limpeza?",
-    a: "O sistema opera de forma autônoma após a programação da rotina. Um operador monitora remotamente via painel de controle, sem exposição ao ambiente do forno.",
-  },
-];
+const wordVariants = {
+  hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
+  visible: (i: number) => ({
+    opacity: 1, y: 0, filter: "blur(0px)",
+    transition: { delay: 0.3 + i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  }),
+}
 
-export default function HomePage() {
+export default function Home() {
+  const heroWords = ["Limpeza", "de", "Fornos", "100%", "Automatizada"]
+
   return (
-    <main className="overflow-x-hidden relative">
-      <DotPattern
-        width={20}
-        height={20}
-        cx={1}
-        cy={1}
-        cr={1}
-        className={cn(
-          "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)] -z-50"
-        )}
-      />
+    <div className="relative min-h-screen bg-surface overflow-x-hidden noise-overlay">
+      <ParticleField />
+      <GridLines />
 
       <nav className="fixed top-0 left-0 right-0 z-50 glass">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <BlurFade delay={0.1}>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-amber-500 flex items-center justify-center">
-                <Factory className="w-4 h-4 text-white" />
-              </div>
-              <span className="font-display font-bold text-lg tracking-tight">
-                CleanForge
-              </span>
+        <div className="max-w-7xl mx-auto px-6 py-3.5 flex items-center justify-between">
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center">
+              <Flame className="w-5 h-5 text-black" />
             </div>
-          </BlurFade>
-          <BlurFade delay={0.2}>
-            <div className="hidden md:flex items-center gap-8 text-sm text-neutral-400">
-              <a href="#solucao" className="hover:text-white transition-colors">Solução</a>
-              <a href="#como-funciona" className="hover:text-white transition-colors">Como Funciona</a>
-              <a href="#metricas" className="hover:text-white transition-colors">Métricas</a>
-              <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
+            <div>
+              <span className="font-heading font-bold text-sm text-white">CleanForge</span>
+              <span className="text-[9px] text-gray-500 block -mt-0.5">by Lhoist</span>
             </div>
-          </BlurFade>
-          <BlurFade delay={0.3}>
-            <a
-              href="#contato"
-              className="px-4 py-2 rounded-xl bg-brand-500 text-white text-sm font-medium hover:bg-brand-600 transition-colors"
-            >
-              Fale Conosco
-            </a>
-          </BlurFade>
+          </motion.div>
+          <div className="hidden md:flex items-center gap-8 text-xs text-gray-400 font-heading">
+            {["Problema", "Solução", "Simulação", "3D", "Métricas"].map((item, i) => (
+              <motion.a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 + i * 0.08 }}
+                className="hover:text-brand-400 transition-colors relative group"
+              >
+                {item}
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-brand-500 group-hover:w-full transition-all duration-300" />
+              </motion.a>
+            ))}
+          </div>
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-3">
+            <span className="text-[10px] text-gray-500 hidden sm:block font-mono">Hackathon 2025</span>
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          </motion.div>
         </div>
       </nav>
 
-      <div className="overflow-hidden w-full">
-        <MacbookComponent
-          title={
-            <div className="flex flex-col items-center justify-center px-4 mt-16">
-              <BlurFade delay={0.2}>
-                <div className="flex mb-4">
-                  <div className="group rounded-full border border-brand-500/20 bg-brand-500/10 text-base transition-all ease-in hover:bg-brand-500/20 shadow-lg">
-                    <span className="inline-flex items-center justify-center px-4 py-1.5 text-sm text-brand-300">
-                      <Zap className="mr-2 w-4 h-4" />
-                      Hackathon Lhoist 2025
-                      <ArrowRight className="ml-1 w-3 h-3" />
-                    </span>
-                  </div>
-                </div>
-              </BlurFade>
+      <section className="relative min-h-screen flex items-center justify-center pt-20 pb-24 px-6">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-radial from-brand-500/8 via-transparent to-transparent" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-brand-500/5 blur-[120px]" />
+        </div>
 
-              <BlurFade delay={0.3}>
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-black text-center bg-gradient-to-br from-white via-white to-neutral-500 bg-clip-text text-transparent mb-4 leading-tight">
-                  CleanForge
-                </h1>
-              </BlurFade>
+        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-brand-500/20 bg-brand-500/5"
+          >
+            <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse" />
+            <span className="text-xs font-heading text-brand-400 tracking-wide">Hackathon Lhoist 2025 — Matozinhos, MG</span>
+          </motion.div>
 
-              <BlurFade delay={0.4}>
-                <p className="text-xl sm:text-2xl md:text-3xl text-neutral-400 font-medium text-center max-w-2xl">
-                  Limpeza autônoma de fornos industriais.{" "}
-                  <span className="text-white">Zero risco humano.</span>
-                </p>
-              </BlurFade>
+          <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.02] tracking-tight">
+            {heroWords.map((word, i) => (
+              <motion.span
+                key={i}
+                custom={i}
+                initial="hidden"
+                animate="visible"
+                variants={wordVariants}
+                className={`inline-block mr-3 ${i >= 3 ? "text-gradient" : "text-white"}`}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
 
-              <BlurFade delay={0.5}>
-                <div className="flex flex-row items-center justify-center mt-8 gap-3">
-                  <a
-                    href="#solucao"
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-amber-500 text-white font-semibold hover:opacity-90 transition-opacity flex items-center gap-2"
-                  >
-                    Ver Solução
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                  <a
-                    href="#como-funciona"
-                    className="px-6 py-3 rounded-xl border border-neutral-700 text-neutral-300 font-medium hover:bg-surface-100 transition-colors"
-                  >
-                    Como Funciona
-                  </a>
-                </div>
-              </BlurFade>
-            </div>
-          }
-          src="/images/dashboard-screen.png"
-          showGradient={true}
-          outro={
-            <div className="flex flex-col items-center justify-center mb-10 sm:mb-20 md:mb-0">
-              <BlurFade delay={0.25} inView>
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mt-10 sm:mt-20 text-center px-4">
-                  Desenvolvido para a{" "}
-                  <Highlight className="font-bold">
-                    Lhoist Brasil
-                  </Highlight>
-                </h2>
-              </BlurFade>
-              <BlurFade delay={0.35} inView>
-                <p className="text-neutral-400 mt-4 text-center max-w-xl px-4">
-                  Unidade de Matozinhos — Minas Gerais
-                </p>
-              </BlurFade>
-            </div>
-          }
-        />
-      </div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-body"
+          >
+            Eliminamos a exposição humana a <span className="text-brand-400 font-semibold">1100°C</span>. Sistema robótico inteligente
+            para limpeza de canais em fornos verticais — sem água, sem risco, sem esforço.
+          </motion.p>
 
-      <section id="solucao" className="py-20 sm:py-32 px-4">
-        <div className="max-w-6xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-16">
-              <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
-                O Problema
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mt-4">
-                Limpeza manual de fornos:{" "}
-                <span className="text-gradient">insegura e ineficiente</span>
-              </h2>
-              <p className="text-neutral-400 mt-6 max-w-3xl mx-auto text-lg">
-                Operadores expostos a temperaturas de até 1.100°C, manipulando equipamentos pesados em posições ergonomicamente prejudiciais. Marretas de 5kg, lanças metálicas e vestimentas especiais que amplificam a carga térmica.
-              </p>
-            </div>
-          </BlurFade>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.3 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <a href="#simulação">
+              <motion.button
+                whileHover={{ scale: 1.03, boxShadow: "0 0 40px rgba(249,115,22,0.4)" }}
+                whileTap={{ scale: 0.97 }}
+                className="bg-gradient-to-r from-brand-500 to-brand-600 text-black font-heading font-bold px-10 py-4 rounded-xl text-sm flex items-center gap-2"
+              >
+                Ver Simulação ao Vivo <ChevronRight className="w-4 h-4" />
+              </motion.button>
+            </a>
+            <a href="#3d">
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="border border-surface-400 bg-surface-200/50 text-white font-heading font-medium px-10 py-4 rounded-xl text-sm hover:bg-surface-300/50 transition-colors flex items-center gap-2"
+              >
+                Visualização 3D <Globe2 className="w-4 h-4 text-brand-400" />
+              </motion.button>
+            </a>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.6 }}
+            className="grid grid-cols-3 gap-8 max-w-lg mx-auto pt-10"
+          >
             {[
-              {
-                icon: ThermometerSun,
-                title: "1.100°C",
-                desc: "Temperatura interna dos canais durante a operação de limpeza",
-              },
-              {
-                icon: Users,
-                title: "84 Poken in Doors",
-                desc: "Total de pontos de acesso nos Fornos 4 e 5 que exigem limpeza periódica",
-              },
-              {
-                icon: Shield,
-                title: "Alto Risco",
-                desc: "Sobrecarga física, estresse térmico e movimentos repetitivos prejudiciais",
-              },
-            ].map((item, i) => (
-              <BlurFade key={i} delay={0.2 + i * 0.1} inView>
-                <div className="glass rounded-2xl p-8 hover:border-brand-500/20 transition-all group">
-                  <item.icon className="w-8 h-8 text-brand-400 mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-neutral-400">{item.desc}</p>
-                </div>
-              </BlurFade>
+              { icon: Flame, val: "1100°C", label: "Temperatura Interna" },
+              { icon: Factory, val: "84", label: "Poken Doors" },
+              { icon: ShieldCheck, val: "Zero", label: "Risco Humano" },
+            ].map((s, i) => (
+              <div key={i} className="text-center group">
+                <s.icon className="w-5 h-5 text-brand-500/60 mx-auto mb-2 group-hover:text-brand-400 transition-colors" />
+                <div className="font-heading font-bold text-2xl text-gradient">{s.val}</div>
+                <div className="text-[10px] text-gray-500 mt-1">{s.label}</div>
+              </div>
             ))}
-          </div>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ delay: 2 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        >
+          <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2.5 }}>
+            <ArrowDown className="w-5 h-5 text-gray-500" />
+          </motion.div>
+        </motion.div>
+      </section>
+
+      <section className="py-16 px-6">
+        <div className="max-w-5xl mx-auto">
+          <AnimatedSection>
+            <MacbookFrame>
+              <ScadaDashboard />
+            </MacbookFrame>
+          </AnimatedSection>
         </div>
       </section>
 
-      <section id="como-funciona" className="py-20 sm:py-32 px-4 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/5 to-transparent pointer-events-none" />
-        <div className="max-w-6xl mx-auto relative">
-          <BlurFade delay={0.1} inView>
+      <section id="problema" className="relative py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection>
             <div className="text-center mb-16">
-              <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
-                A Solução
-              </span>
-              <WordFadeIn
-                words="Sistema Robótico Autônomo CleanForge"
-                className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mt-4"
-                inView
-              />
-              <p className="text-neutral-400 mt-6 max-w-3xl mx-auto text-lg">
-                Um braço robótico inteligente que realiza a limpeza completa dos canais sem nenhuma exposição humana ao ambiente do forno.
+              <span className="text-xs font-heading font-bold text-brand-500 uppercase tracking-[0.2em]">O Problema</span>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold mt-4">
+                Condições <span className="text-gradient">Extremas</span>
+              </h2>
+              <p className="text-gray-400 mt-5 max-w-xl mx-auto leading-relaxed">
+                Operadores expostos a temperaturas de 1100°C, marretas de 5kg, sobrecarga ergonômica severa.
               </p>
             </div>
-          </BlurFade>
+          </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {steps.map((step, i) => (
-              <BlurFade key={i} delay={0.2 + i * 0.15} inView>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="glass rounded-2xl p-8 relative overflow-hidden group"
-                >
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-500/5 rounded-full blur-3xl group-hover:bg-brand-500/10 transition-colors" />
-                  <div className="flex items-start gap-4 relative">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center">
-                      <step.icon className="w-6 h-6 text-brand-400" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-brand-400 font-semibold mb-1">
-                        ETAPA {String(i + 1).padStart(2, "0")}
-                      </div>
-                      <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-                      <p className="text-neutral-400 leading-relaxed">
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </BlurFade>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="metricas" className="py-20 sm:py-32 px-4">
-        <div className="max-w-6xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-16">
-              <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
-                Impacto
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mt-4">
-                Resultados que{" "}
-                <span className="text-gradient">transformam</span>
-              </h2>
-            </div>
-          </BlurFade>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {metrics.map((m, i) => (
-              <BlurFade key={i} delay={0.2 + i * 0.1} inView>
-                <div className="glass rounded-2xl p-6 text-center group hover:border-brand-500/20 transition-all">
-                  <m.icon className="w-8 h-8 text-brand-400 mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                  <div className="text-3xl sm:text-4xl font-display font-black text-gradient">
-                    <NumberTicker value={m.value} suffix={m.suffix} />
-                  </div>
-                  <p className="text-neutral-400 text-sm mt-2">{m.label}</p>
-                </div>
-              </BlurFade>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 sm:py-32 px-4 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-1">
-            <BlurFade delay={0.1} inView>
-              <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase">
-                Presença Global
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold mt-4">
-                Lhoist: <span className="text-gradient">130+ anos</span> de excelência
-              </h2>
-              <p className="text-neutral-400 mt-4 text-lg leading-relaxed">
-                Presente no Brasil há 21 anos nos estados de Minas Gerais, Goiás, Espírito Santo e Rio de Janeiro. Uma empresa global dedicada à produção de cal e minerais, comprometida com inovação e sustentabilidade.
-              </p>
-            </BlurFade>
-          </div>
-          <div className="flex-1 flex justify-center">
-            <Globe className="opacity-80" speed={1.5} />
-          </div>
-        </div>
-      </section>
-
-      <section id="faq" className="py-20 sm:py-32 px-4">
-        <div className="max-w-3xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-display font-bold">
-                Perguntas Frequentes
-              </h2>
-              <p className="text-neutral-400 mt-3">
-                Tire suas dúvidas sobre o sistema CleanForge
-              </p>
-            </div>
-          </BlurFade>
-
-          <Accordion type="single" collapsible className="w-full">
-            {faqItems.map((item, i) => (
-              <BlurFade key={i} delay={0.15 + i * 0.05} inView>
-                <AccordionItem
-                  value={`item-${i}`}
-                  className="border-neutral-800 rounded-xl mb-3"
-                >
-                  <AccordionTrigger className="text-left text-sm sm:text-base hover:no-underline px-4 py-4 rounded-xl hover:bg-surface-100 transition-all">
-                    {item.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-sm sm:text-base text-neutral-400 px-4">
-                    {item.a}
-                  </AccordionContent>
-                </AccordionItem>
-              </BlurFade>
-            ))}
-          </Accordion>
-        </div>
-      </section>
-
-      <section id="contato" className="py-20 sm:py-32 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <BlurFade delay={0.1} inView>
-            <div className="glass rounded-3xl p-12 sm:p-16 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-amber-500/10 pointer-events-none" />
-              <div className="relative">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold">
-                  Pronto para{" "}
-                  <span className="text-gradient">transformar</span>
-                  <br />
-                  sua operação?
-                </h2>
-                <p className="text-neutral-400 mt-6 text-lg max-w-xl mx-auto">
-                  Entre em contato para saber como o CleanForge pode eliminar riscos e aumentar a produtividade na sua planta industrial.
-                </p>
-                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <a
-                    href="mailto:contato@cleanforge.com.br"
-                    className="px-8 py-4 rounded-xl bg-gradient-to-r from-brand-500 to-amber-500 text-white font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 text-lg"
+          <div className="grid lg:grid-cols-2 gap-10">
+            <AnimatedSection delay={0.1}>
+              <FurnaceDiagram />
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="space-y-4">
+                {[
+                  { icon: Flame, title: "Estresse Térmico", desc: "Operador a poucos centímetros de canais a 1100°C com macacão JGB, luvas Korion e botas de cano longo.", stat: "1100°C", color: "text-red-400" },
+                  { icon: Zap, title: "Sobrecarga Física", desc: "Marreta de 5kg + lança pressurizada (3.5 bar). Flexão repetida de tronco e membros superiores.", stat: "5kg", color: "text-orange-400" },
+                  { icon: Clock, title: "Baixa Eficiência", desc: "Forno 4: 36 portas, 2x/semana. Forno 5: 48 portas, a cada 15 dias. Tampa de 20kg.", stat: "84 portas", color: "text-blue-400" },
+                  { icon: ShieldCheck, title: "Risco Ocupacional", desc: "Flexão cervical, contração isométrica prolongada, movimentos repetitivos em calor extremo.", stat: "Alto", color: "text-purple-400" },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex gap-4 p-5 rounded-xl border border-surface-400/30 bg-surface-100/50 hover:bg-surface-200/50 transition-all group cursor-default"
                   >
-                    Solicitar Demonstração
-                    <ArrowRight className="w-5 h-5" />
-                  </a>
+                    <item.icon className={`w-6 h-6 flex-shrink-0 ${item.color} mt-0.5`} />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-heading font-bold text-sm text-white">{item.title}</span>
+                        <span className="text-xs font-heading font-bold text-brand-400">{item.stat}</span>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <span className="text-xs font-heading font-bold text-brand-500 uppercase tracking-[0.2em]">Comparação</span>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold mt-4">
+                Manual vs <span className="text-gradient">Automatizado</span>
+              </h2>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={0.1}>
+            <BeforeAfter />
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <section id="solução" className="py-24 px-6 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/[0.02] to-transparent" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <AnimatedSection>
+            <div className="text-center mb-16">
+              <span className="text-xs font-heading font-bold text-brand-500 uppercase tracking-[0.2em]">A Solução</span>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold mt-4">
+                Processo em <span className="text-gradient">4 Etapas</span>
+              </h2>
+              <p className="text-gray-400 mt-5 max-w-xl mx-auto leading-relaxed">
+                Sistema robótico com sensores térmicos IR, braço de 6 eixos e jato de ar comprimido.
+              </p>
+            </div>
+          </AnimatedSection>
+          <div className="max-w-2xl mx-auto">
+            <ProcessTimeline />
+          </div>
+        </div>
+      </section>
+
+      <section id="simulação" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection>
+            <div className="text-center mb-16">
+              <span className="text-xs font-heading font-bold text-brand-500 uppercase tracking-[0.2em]">Demonstração</span>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold mt-4">
+                Simulação <span className="text-gradient">Interativa</span>
+              </h2>
+              <p className="text-gray-400 mt-5 max-w-xl mx-auto">
+                Veja o sistema operando em tempo real — clique para iniciar o ciclo completo.
+              </p>
+            </div>
+          </AnimatedSection>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <AnimatedSection delay={0.1}>
+              <CleaningSimulation />
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <MacbookFrame>
+                <ScadaDashboard />
+              </MacbookFrame>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section id="3d" className="py-24 px-6 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/[0.02] to-transparent" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <span className="text-xs font-heading font-bold text-brand-500 uppercase tracking-[0.2em]">Visualização</span>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold mt-4">
+                Modelo <span className="text-gradient">3D do Forno</span>
+              </h2>
+              <p className="text-gray-400 mt-5 max-w-xl mx-auto">
+                Visualização interativa do forno com braço robótico, partículas de calor e sensores.
+              </p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={0.2}>
+            <FurnaceScene />
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <section id="métricas" className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <AnimatedSection>
+            <div className="text-center mb-16">
+              <span className="text-xs font-heading font-bold text-brand-500 uppercase tracking-[0.2em]">Resultados</span>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold mt-4">
+                Impacto <span className="text-gradient">Mensurável</span>
+              </h2>
+            </div>
+          </AnimatedSection>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <NumberCounter end={100} suffix="%" label="Redução de Risco" sublabel="Exposição térmica zero" />
+            <NumberCounter end={80} suffix="%" label="Mais Produtividade" sublabel="De 4h para 45min" duration={1.8} />
+            <NumberCounter end={75} suffix="%" label="Menos Custo" sublabel="1 técnico / 4 fornos" duration={1.5} />
+            <NumberCounter end={8} suffix=" meses" label="ROI" sublabel="Retorno do investimento" duration={1} />
+          </div>
+
+          <AnimatedSection delay={0.3}>
+            <div className="mt-16 grid md:grid-cols-3 gap-5">
+              {[
+                { icon: Factory, title: "Replicabilidade", desc: "Adaptável a todos os fornos verticais tipo fluxo paralelo regenerativo da planta." },
+                { icon: Cpu, title: "Integração SCADA", desc: "Dados em tempo real com registro histórico, análise preditiva e agendamento." },
+                { icon: Clock, title: "Operação 24/7", desc: "Sistema autônomo permite limpeza fora do horário comercial, sem paradas." },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ y: -6, borderColor: "rgba(249,115,22,0.3)" }}
+                  className="p-6 rounded-xl border border-surface-400/30 bg-surface-100/50 transition-all"
+                >
+                  <item.icon className="w-8 h-8 text-brand-500/70 mb-4" />
+                  <h3 className="font-heading font-bold text-base text-white">{item.title}</h3>
+                  <p className="text-sm text-gray-400 mt-2 leading-relaxed">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection>
+            <div className="text-center mb-10">
+              <span className="text-xs font-heading font-bold text-brand-500 uppercase tracking-[0.2em]">Presença Global</span>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold mt-4">
+                Lhoist no <span className="text-gradient">Mundo</span>
+              </h2>
+            </div>
+          </AnimatedSection>
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <AnimatedSection delay={0.1}>
+              <GlobeVisualization />
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { label: "Forno 4", specs: "36 poken doors (18/cuba) — 2x/semana" },
+                    { label: "Forno 5", specs: "48 poken doors (24/cuba) — a cada 15 dias" },
+                    { label: "Condições", specs: "1100°C interno, ângulo 120°, CaO fundido" },
+                    { label: "Restrições", specs: "Sem água, preservar refratário, acesso por escada" },
+                  ].map((block, i) => (
+                    <div key={i} className="p-4 rounded-xl border border-surface-400/30 bg-surface-100/50">
+                      <div className="font-heading font-bold text-xs text-brand-400 mb-2">{block.label}</div>
+                      <p className="text-[11px] text-gray-500 leading-relaxed">{block.specs}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
-          </BlurFade>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
-      <footer className="border-t border-neutral-800 py-8 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-500 to-amber-500 flex items-center justify-center">
-              <Factory className="w-3.5 h-3.5 text-white" />
-            </div>
-            <span className="font-display font-bold text-sm">CleanForge</span>
+      <section className="py-28 px-6 relative">
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-500/5 via-transparent to-transparent" />
+        <AnimatedSection>
+          <div className="max-w-3xl mx-auto text-center space-y-8 relative z-10">
+            <h2 className="font-heading text-4xl md:text-6xl font-bold">
+              Pronto para <span className="text-gradient">Eliminar o Risco?</span>
+            </h2>
+            <p className="text-gray-400 max-w-xl mx-auto leading-relaxed">
+              CleanForge transforma a limpeza de fornos em um processo seguro, eficiente e replicável.
+            </p>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="inline-block">
+              <a
+                href="https://hackathon.deco.page"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-500 to-brand-600 text-black font-heading font-bold px-12 py-5 rounded-xl text-base glow-orange"
+              >
+                Conhecer o Projeto Completo <ChevronRight className="w-5 h-5" />
+              </a>
+            </motion.div>
           </div>
-          <p className="text-neutral-500 text-xs text-center">
-            Solução desenvolvida para o Hackathon Lhoist 2025 — Automação de limpeza de fornos industriais.
-          </p>
+        </AnimatedSection>
+      </section>
+
+      <footer className="border-t border-surface-400/20 py-10 px-6 relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center">
+              <Flame className="w-4 h-4 text-black" />
+            </div>
+            <div>
+              <span className="font-heading font-bold text-sm text-white">CleanForge</span>
+              <span className="text-[9px] text-gray-500 block">Automação Industrial</span>
+            </div>
+          </div>
+          <span className="text-xs text-gray-500 font-mono">Hackathon Lhoist 2025 • Matozinhos, MG</span>
         </div>
       </footer>
-    </main>
-  );
+    </div>
+  )
 }
