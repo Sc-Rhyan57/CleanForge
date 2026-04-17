@@ -26,7 +26,6 @@ const wordVariants = {
   }),
 }
 
-// ─── Componente: Especificações Técnicas do Canal ───────────────────────────
 function CanalSpecs() {
   return (
     <div className="relative rounded-2xl border border-surface-400/40 overflow-hidden bg-surface-100/60 backdrop-blur-sm">
@@ -64,7 +63,6 @@ function CanalSpecs() {
             </radialGradient>
           </defs>
 
-          {/* Paredes externas do forno */}
           <rect x="40" y="20" width="50" height="280" fill="url(#wallGrad)" rx="4" />
           <rect x="390" y="20" width="50" height="280" fill="url(#wallGrad)" rx="4" />
 
@@ -72,20 +70,16 @@ function CanalSpecs() {
           <rect x="90" y="20" width="20" height="280" fill="#5a3010" opacity="0.8" />
           <rect x="370" y="20" width="20" height="280" fill="#5a3010" opacity="0.8" />
 
-          {/* Interior do canal */}
           <rect x="110" y="20" width="260" height="280" fill="url(#innerGrad)" />
           <rect x="110" y="20" width="260" height="280" fill="url(#heatGrad)" />
 
-          {/* Calor emanando do fundo */}
           <ellipse cx="240" cy="300" rx="130" ry="40" fill="url(#heatCore)" />
 
-          {/* Pilares/colunas centrais (visíveis no projeto) */}
           <rect x="195" y="200" width="30" height="100" fill="#4a2010" rx="3" />
           <rect x="255" y="200" width="30" height="100" fill="#4a2010" rx="3" />
           <rect x="180" y="195" width="60" height="12" fill="#5a2810" rx="2" />
           <rect x="240" y="195" width="60" height="12" fill="#5a2810" rx="2" />
-
-          {/* Incrustações (CaO) nas paredes */}
+          
           <ellipse cx="140" cy="120" rx="22" ry="10" fill="#c8834a" opacity="0.85" />
           <ellipse cx="145" cy="155" rx="18" ry="8" fill="#bf7840" opacity="0.7" />
           <ellipse cx="138" cy="185" rx="15" ry="7" fill="#d08850" opacity="0.9" />
@@ -95,39 +89,33 @@ function CanalSpecs() {
           <ellipse cx="200" cy="195" rx="25" ry="7" fill="#c07840" opacity="0.7" />
           <ellipse cx="285" cy="190" rx="22" ry="6" fill="#c07840" opacity="0.65" />
 
-          {/* Braço robótico entrando pela poken door */}
           <rect x="30" y="138" width="120" height="8" fill="#555" rx="4" />
           <rect x="148" y="134" width="60" height="16" fill="#3b82f6" rx="3" filter="url(#glow)" />
-          {/* Jato de ar */}
+
           <line x1="208" y1="142" x2="340" y2="120" stroke="#60a5fa" strokeWidth="1.5" strokeDasharray="6,4" opacity="0.8" />
           <line x1="208" y1="142" x2="338" y2="155" stroke="#93c5fd" strokeWidth="1" strokeDasharray="5,5" opacity="0.6" />
           <line x1="208" y1="142" x2="200" y2="180" stroke="#bfdbfe" strokeWidth="1" strokeDasharray="4,6" opacity="0.4" />
 
-          {/* Poken Door */}
           <rect x="20" y="128" width="28" height="30" fill="#888" rx="3" stroke="#aaa" strokeWidth="1" />
           <circle cx="34" cy="143" r="10" fill="#666" stroke="#999" strokeWidth="1.5" />
           <text x="9" y="118" fill="#f97316" fontSize="8" fontFamily="monospace" fontWeight="bold">Ø300mm</text>
           <line x1="20" y1="128" x2="20" y2="120" stroke="#f97316" strokeWidth="0.8" opacity="0.6" />
           <line x1="48" y1="128" x2="48" y2="120" stroke="#f97316" strokeWidth="0.8" opacity="0.6" />
 
-          {/* Cotas de profundidade */}
           <line x1="460" y1="20" x2="460" y2="300" stroke="#444" strokeWidth="0.8" />
           <line x1="455" y1="20" x2="465" y2="20" stroke="#444" strokeWidth="0.8" />
           <line x1="455" y1="300" x2="465" y2="300" stroke="#444" strokeWidth="0.8" />
           <text x="465" y="165" fill="#888" fontSize="8" fontFamily="monospace">1–5m</text>
           <text x="462" y="175" fill="#888" fontSize="8" fontFamily="monospace">prof.</text>
 
-          {/* Ângulo de atuação */}
           <path d="M 208 142 L 340 90 A 140 140 0 0 1 340 195 Z" fill="#f97316" opacity="0.06" />
           <path d="M 208 142 L 340 90" stroke="#f97316" strokeWidth="0.8" strokeDasharray="4,3" opacity="0.4" />
           <path d="M 208 142 L 340 195" stroke="#f97316" strokeWidth="0.8" strokeDasharray="4,3" opacity="0.4" />
           <text x="310" y="132" fill="#f97316" fontSize="8" fontFamily="monospace" opacity="0.9">120°</text>
 
-          {/* Temperatura */}
           <text x="180" y="260" fill="#ef4444" fontSize="9" fontFamily="monospace" fontWeight="bold" opacity="0.8">1100°C</text>
           <text x="178" y="272" fill="#888" fontSize="7" fontFamily="monospace">temperatura interna</text>
 
-          {/* Legenda */}
           <rect x="100" y="295" width="8" height="8" fill="#c8834a" rx="1" />
           <text x="112" y="303" fill="#888" fontSize="7" fontFamily="monospace">Incrustação CaO</text>
           <rect x="200" y="295" width="8" height="8" fill="#3b82f6" rx="1" />
@@ -136,7 +124,6 @@ function CanalSpecs() {
           <text x="322" y="303" fill="#888" fontSize="7" fontFamily="monospace">Refratário</text>
         </svg>
 
-        {/* Métricas do canal em cards */}
         <div className="grid grid-cols-3 gap-3 mt-4">
           {[
             { label: "Diâmetro da Abertura", value: "300 mm", sub: "Poken in door", color: "text-brand-400" },
@@ -155,7 +142,6 @@ function CanalSpecs() {
   )
 }
 
-// ─── Comparativo dos Fornos ──────────────────────────────────────────────────
 function FornoPokensTable() {
   const fornos = [
     { name: "Forno 4", cubas: 2, pokensTotal: 36, porCuba: 18, freq: "2× por semana", status: "Crítico", cor: "text-red-400", bg: "bg-red-500/10 border-red-500/20" },
@@ -196,7 +182,7 @@ function FornoPokensTable() {
             </div>
           </motion.div>
         ))}
-        {/* Total */}
+
         <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 p-4 flex items-center justify-between">
           <div>
             <span className="font-heading font-bold text-sm text-brand-400">Total Geral</span>
@@ -207,7 +193,7 @@ function FornoPokensTable() {
             <p className="text-[10px] text-gray-500">poken in doors</p>
           </div>
         </div>
-        {/* Visualização das portas */}
+
         <div className="mt-2">
           <p className="text-[10px] text-gray-500 mb-2 font-heading">Distribuição visual — Poken Doors por forno</p>
           <div className="space-y-3">
@@ -241,7 +227,6 @@ function FornoPokensTable() {
   )
 }
 
-// ─── Riscos Ergonômicos ──────────────────────────────────────────────────────
 function RiscosErgonomicos() {
   const riscos = [
     {
@@ -320,7 +305,6 @@ function RiscosErgonomicos() {
   )
 }
 
-// ─── Processo de Incrustação ─────────────────────────────────────────────────
 function IncrustaçãoDiagram() {
   return (
     <div className="rounded-2xl border border-surface-400/40 bg-surface-100/50 overflow-hidden">
@@ -386,7 +370,6 @@ function IncrustaçãoDiagram() {
   )
 }
 
-// ─── Solução Técnica Detalhada ───────────────────────────────────────────────
 function SolucaoTecnica() {
   const componentes = [
     {
@@ -466,7 +449,6 @@ function SolucaoTecnica() {
   )
 }
 
-// ─── ROI e Métricas Financeiras ──────────────────────────────────────────────
 function ROISection() {
   const metricas = [
     { antes: "~4 horas", depois: "~45 min", label: "Tempo por ciclo completo", reducao: "81%" },
@@ -525,7 +507,6 @@ function ROISection() {
   )
 }
 
-// ─── Página Principal ────────────────────────────────────────────────────────
 export default function Home() {
   const heroWords = ["Limpeza", "de", "Fornos", "100%", "Automatizada"]
   const heroRef = useRef(null)
@@ -578,7 +559,6 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* ── HERO ── */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center pt-20 pb-24 px-6">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-radial from-brand-500/8 via-transparent to-transparent" />
@@ -679,7 +659,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ── SCADA HERO ── */}
       <section className="py-12 px-6">
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
@@ -720,7 +699,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── DADOS TÉCNICOS ── */}
       <section id="dados" className="py-24 px-6 bg-surface-100/30">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
@@ -744,8 +722,7 @@ export default function Home() {
             </AnimatedSection>
           </div>
 
-          {/* Banner de restrições */}
-          <AnimatedSection delay={0.3}>
+          <AnimatedSection delay={0.6}>
             <div className="rounded-2xl border border-surface-400/30 bg-surface-100/50 p-6">
               <h3 className="font-heading font-bold text-base text-white mb-4 flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-amber-500" />
@@ -771,7 +748,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── COMPARAÇÃO ANTES/DEPOIS ── */}
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
@@ -782,13 +758,12 @@ export default function Home() {
               </h2>
             </div>
           </AnimatedSection>
-          <AnimatedSection delay={0.1}>
+          <AnimatedSection delay={0.3}>
             <BeforeAfter />
           </AnimatedSection>
         </div>
       </section>
 
-      {/* ── A SOLUÇÃO ── */}
       <section id="solucao" className="py-24 px-6 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/[0.02] to-transparent" />
         <div className="max-w-7xl mx-auto relative z-10">
@@ -805,7 +780,7 @@ export default function Home() {
           </AnimatedSection>
 
           <div className="grid lg:grid-cols-2 gap-10">
-            <AnimatedSection delay={0.1}>
+            <AnimatedSection delay={0.3}>
               <SolucaoTecnica />
             </AnimatedSection>
             <AnimatedSection delay={0.2}>
@@ -819,7 +794,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SIMULAÇÃO ── */}
       <section id="simulacao" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
@@ -846,7 +820,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── MODELO 3D ── */}
       <section id="3d" className="py-24 px-6 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/[0.02] to-transparent" />
         <div className="max-w-7xl mx-auto relative z-10">
@@ -866,8 +839,7 @@ export default function Home() {
           </AnimatedSection>
         </div>
       </section>
-
-      {/* ── RESULTADOS ── */}
+      
       <section id="resultados" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
@@ -943,7 +915,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── GLOBO / PRESENÇA GLOBAL ── */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
@@ -987,7 +958,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CTA FINAL ── */}
       <section className="py-28 px-6 relative">
         <div className="absolute inset-0 bg-gradient-to-t from-brand-500/5 via-transparent to-transparent" />
         <AnimatedSection>
@@ -1000,7 +970,7 @@ export default function Home() {
             </p>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="inline-block">
               <a
-                href="https://hackathon.deco.page"
+                href="https://cleanforge-chi.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-500 to-brand-600 text-black font-heading font-bold px-12 py-5 rounded-xl text-base glow-orange"
@@ -1012,7 +982,6 @@ export default function Home() {
         </AnimatedSection>
       </section>
 
-      {/* ── FOOTER ── */}
       <footer className="border-t border-surface-400/20 py-10 px-6 relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
